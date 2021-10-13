@@ -1,38 +1,56 @@
 #include <stdio.h>
 
+void calcular_promedio();
+void mayoresProm();
+
 #define MAX_NUM 10
 #define OPCIONES_MENU 5
 int valores[MAX_NUM] = {0};
 int valoresMayores[MAX_NUM] = {0};   //Como no se sabe la cantidad de datos mayores al prom., se usará el mismo tamaño.
 int datosRegistrados = 0;
-float promedio;
+float promedio = 0;
 int cantMayores = 0;
 
-void mostrarMayoresProm(){
-    printf("Los valores mayores al promedio(%i) son:\n");
-    for(int i = 0; i <= cantMayores; i++) {                   //Se cicla para que imprima solo la cantidad de datos conocidos y no todo el registro.
-      printf("%s \n", valoresMayores[i]);
+void mostrarMayoresProm() {
+    if (cantMayores == 0) {
+        mayoresProm();
+    }
+
+    printf("Los valores mayores al promedio(%i) son:\n", cantMayores);
+    for(int i = 0; i < cantMayores; i++) {                   //Se cicla para que imprima solo la cantidad de datos conocidos y no todo el registro.
+      printf("%i \n", valoresMayores[i]);
     }
 }
 
 void mayoresProm() {
-    for(int i = 0; i <= datosRegistrados; i++) {           //Se cicla solo durante la cantidad de datos conocidos(variable datosRegistrados)
-        if(valores[i] > promedio) {                        //Evalúa si el valor de la casilla 'valores[i]' es mayor al promedio
+    if (promedio == 0) {
+        calcular_promedio();
+    }
+
+    for(int i = 0; i < datosRegistrados; i++) {           //Se cicla solo durante la cantidad de datos conocidos(variable datosRegistrados)
+        if((float)valores[i] > promedio) {                        //Evalúa si el valor de la casilla 'valores[i]' es mayor al promedio
+            valoresMayores[cantMayores] = valores[i];                //Asigna el valor de la casilla evaluada a otro registro, este nuevo registro contiene los datos mayores al promedio.
             ++cantMayores;                                 //Aumenta en 1 la cantidad de datos mayores al promedio
-            valoresMayores[i] = valores[i];                //Asigna el valor de la casilla evaluada a otro registro, este nuevo registro contiene los datos mayores al promedio.
         }
     }
-    printf("La cantidad de datos mayores al promedio es de: %i", cantMayores);
+    printf("La cantidad de datos mayores al promedio es de: %i\n", cantMayores);
 }
 
 void calcular_promedio() {
-    int suma = 0;
+    float suma = 0;
 
-    for(int i = 0; i <= datosRegistrados; i++) {
-       suma += valores[i];
+    if (datosRegistrados == 0) {
+        printf("Por favor capture datos (opcion 1)\n");
+        return;
     }
+
+    for(int i = 0; i < datosRegistrados; i++) {
+       suma += (float)valores[i];
+    }
+
     promedio = suma / datosRegistrados;
-    printf("El promedio de los valores ingresdos(%i en total) es: %f", datosRegistrados, promedio);
+
+    printf("El promedio de los valores ingresdos(%i en total) es: %f\n\n", datosRegistrados, promedio);
 }
 
 void ingresarDatos() {
@@ -41,7 +59,7 @@ void ingresarDatos() {
         printf("Has llenado los campos disponibles");
     }
     else{
-        printf("Ingresa un valor entero:\n- ");
+        printf("Ingresa un valor entero: ");
         scanf("%i", &valor);
         valores[datosRegistrados++] = valor;            //Asigna el índice en que se guardará el dato, y luego incrementa en 1 el contador de cuántos datos se han registrado
     }
@@ -57,7 +75,7 @@ int presentamenu(const char* opciones[OPCIONES_MENU]) {
 	entrada = 0;
 	entradavalida = 0;
 	do {
-		printf("Seleccione una opcion: \n");
+		printf("Seleccione una opcion: ");
 		scanf_s("%i", &entrada);
 
 		/* Validar la entrada */
