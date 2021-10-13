@@ -9,17 +9,17 @@ float promedio;
 
 void mostrarMayoresProm(){
     printf("Los valores mayores al promedio(%i) son:\n");
-    for(int i = 0; i <= --cantMayores; i++) {
+    for(int i = 0; i <= --cantMayores; i++) {                   //Se cicla para que imprima solo la cantidad de datos conocidos y no todo el registro.
       printf("&s \n" valoresMayores[i]);
     }
 }
 
 void mayoresProm() {
     int cantMayores = 0;
-    for(int i = 0; i <= datosRegistrados; i++) {
-        if(valores[i] > promedio) {
-            ++cantMayores;
-            valoresMayores[i] = valores[i];
+    for(int i = 0; i <= datosRegistrados; i++) {           //Se cicla solo durante la cantidad de datos conocidos(variable datosRegistrados)
+        if(valores[i] > promedio) {                        //Evalúa si el valor de la casilla 'valores[i]' es mayor al promedio
+            ++cantMayores;                                 //Aumenta en 1 la cantidad de datos mayores al promedio
+            valoresMayores[i] = valores[i];                //Asigna el valor de la casilla evaluada a otro registro, este nuevo registro contiene los datos mayores al promedio.
         }
     }
     printf("La cantidad de datos mayores al promedio es de: %i" cantMayores);
@@ -29,7 +29,7 @@ void promedio() {
     int suma;
 
     for(int i = 0; i <= datosRegistrados; i++) {
-       suma += datosRegistrados[i];
+       suma += datosRegistrados[i];                  //Almacena los valores del resgisto en 'suma'
     }
     promedio = suma/datosRegistrados;
     printf("El promedio de los valores ingresdos(%i en total) es: %f" datosRegistrados, promedio);
@@ -37,13 +37,13 @@ void promedio() {
 
 void ingresarDatos() {
     int valor;
-    if(datosRegistrados == MAX_NUM){
+    if(datosRegistrados == MAX_NUM){                    //Valida la disponibilidad de espacio
         printf("Has llenado los campos disponibles");
     }
     else{
         printf("Ingresa un valor entero:\n- ");
         scanf("%i", &valor);
-        valores[datosRegistrados++] = valor;
+        valores[datosRegistrados++] = valor;            //Asigna el índice en que se guardará el dato, y luego incrementa en 1 el contador de cuántos datos se han registrado
     }
 }
 
