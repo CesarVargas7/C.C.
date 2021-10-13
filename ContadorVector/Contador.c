@@ -3,15 +3,23 @@
 #define MAX_NUM 10
 #define OPCIONES_MENU 5
 int valores[MAX_NUM] = {0};
+int valoresMayores[MAX_NUM] = {0};   //Como no se sabe la cantidad de datos mayores al prom., se usará el mismo tamaño.
 int datosRegistrados = 0;
 float promedio;
 
+void mostrarMayoresProm(){
+    printf("Los valores mayores al promedio(%i) son:\n");
+    for(int i = 0; i <= --cantMayores; i++) {
+      printf("&s \n" valoresMayores[i]);
+    }
+}
+
 void mayoresProm() {
     int cantMayores = 0;
-    for(int i = 0; i == datosRegistrados; i++) {
-        if(valores[1] > promedio) {
+    for(int i = 0; i <= datosRegistrados; i++) {
+        if(valores[i] > promedio) {
             ++cantMayores;
-            
+            valoresMayores[i] = valores[i];
         }
     }
     printf("La cantidad de datos mayores al promedio es de: %i" cantMayores);
@@ -23,7 +31,7 @@ void promedio() {
     for(int i = 0; i <= datosRegistrados; i++) {
        suma += datosRegistrados[i];
     }
-    promedio = suman/datosRegistrados;
+    promedio = suma/datosRegistrados;
     printf("El promedio de los valores ingresdos(%i en total) es: %f" datosRegistrados, promedio);
 }
 
