@@ -14,17 +14,17 @@ void mayoresProm() {
             
         }
     }
-    printf("La cantidad de datos mayores al promedio es de: %i" cantMayores);
+    printf("La cantidad de datos mayores al promedio es de: %i", cantMayores);
 }
 
-void promedio() {
-    int suma;
+void calcular_promedio() {
+    int suma = 0;
 
     for(int i = 0; i <= datosRegistrados; i++) {
-       suma += datosRegistrados[i];
+       suma += valores[i];
     }
-    promedio = suman/datosRegistrados;
-    printf("El promedio de los valores ingresdos(%i en total) es: %f" datosRegistrados, promedio);
+    promedio = suma / datosRegistrados;
+    printf("El promedio de los valores ingresdos(%i en total) es: %f", datosRegistrados, promedio);
 }
 
 void ingresarDatos() {
@@ -66,7 +66,7 @@ int presentamenu(const char* opciones[OPCIONES_MENU]) {
 int main() {
 
     int dato;
-    int opcion;
+    int seleccion;
     
 	// Menu
 	char* opciones[OPCIONES_MENU] =
@@ -78,10 +78,9 @@ int main() {
 		"Salir."
 	};
 
-    printf("        ---Contador en C---\n\n")
-    do{
+    printf("        ---Contador en C---\n\n");
+    do {
         printf("-----------------------------------------\n");
-        presentamenu();
         seleccion = presentamenu(opciones);
 		printf("------- %s -------\n", opciones[seleccion - 1]);
         switch (seleccion){
@@ -89,13 +88,13 @@ int main() {
                 ingresarDatos();
                 break;
             case 2:
-                promedio();
+                calcular_promedio();
                 break;
             case 3:
                 mayoresProm();
                 break;
             case 4:
-                mostrarMayoresProm();
+                // mostrarMayoresProm();
                 break;
             case 5:
                 printf("Hasta la proxima");
@@ -104,5 +103,6 @@ int main() {
                 printf("Error, inválida\n\a");
         }
 	} while (seleccion != 5);
+
     return 0;
 }
